@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Home Page</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"></link>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+    </h:head>
+    <h:body style="background-color: #e9ebee">
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3f5c9a;">
+            <div class="container">
+                <h:form>
+                    <h:commandLink class="navbar-brand" action="index"><i class="fas fa-users"></i> Friends Book</h:commandLink>
+                </h:form>
+                <h:form class="form-inline ml-auto">
+                    <div class="navbar-nav">
+                        <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="home.xhtml"><i class="fas fa-home"></i> Home</h:outputLink>
+                        <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="home.xhtml"><i class="far fa-user"></i> Profile</h:outputLink>
+                        <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="home.xhtml"><i class="far fa-envelope"></i> Message</h:outputLink>
+                        <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="home.xhtml"><i class="far fa-bell"></i> Notification</h:outputLink>
+                        <h:outputLink class="nav-item nav-link ml-sm-2 active" value="home.xhtml" ><i class="fas fa-sign-out-alt"></i> Log Out</h:outputLink>
+                    </div>
+                </h:form>
+            </div>
+        </nav>
+        
+        <div class="container-fluid">
+            <br/>
+            <div class="row">
+                <div class="col-md-3">
+                    <!-- left column to display friends -->
+                    <div class="card">
+                        <h5 class="card-header"><i class="fas fa-user-friends"></i> Friend List</h5>
+                        <div class="card-body">
+                            <h:form>
+                                <div class="form-group mb-2">
+                                    <h:inputText class="form-control mx-sm-1"></h:inputText>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <h:commandButton class="form-control btn btn-primary" value="Send Request"></h:commandButton>
+                                </div>
+                            </h:form>
+                            <div>
+                                <h:message class="alert alert-danger my-sm-2" for="friendRequestError"></h:message>
+                            </div>
+                        </div>
+                        <ul class="list-group list-group-flush">
+                            <!--display few friends and in a link fashion-->
+                            <li class="list-group-item">Friend 1</li>
+                            <li class="list-group-item">Friend 2</li>
+                            <li class="list-group-item">Friend 3</li>
+                            <li class="list-group-item">View More</li>
+                        </ul>
+                    </div>
+                </div><!--end of left column-->
+                
+                <div class="col-md-6">
+                    <!--middle column to display latest posts with comment 
+                    and create new comment
+                    and create new post-->
+                </div><!--end of middle column-->
+                
+                <div class="col-md-3">
+                    <!--right column to display top three hash tags 
+                    and input text box to search a particular hash tag-->
+                    <div class="card">
+                        <h5 class="card-header"><i class="fab fa-slack-hash"></i> Featured Hash Tag</h5>
+                        <ul class="list-group list-group-flush">
+                            <!--display top 3 tags-->
+                            <li class="list-group-item">Cras justo odio</li>
+                            <li class="list-group-item">Dapibus ac facilisis in</li>
+                            <li class="list-group-item">Vestibulum at eros</li>
+                        </ul>
+                        <div class="card-body">
+                            <h:form class="form-inline">
+                                <div class="form-group mb-2">
+                                    <h:inputText class="form-control mx-sm-1"></h:inputText>
+                                    <h:commandButton class="btn btn-primary" value="Search"></h:commandButton>
+                                </div>
+                            </h:form>
+                            <div>
+                                <h:message class="alert alert-danger my-sm-2" for="hashtagError"></h:message>
+                            </div>
+                        </div>
+                    </div>
+                </div><!--end of right column-->
+                
+                
+            </div>
+            
+            
+            
+        </div>
+        
+        
+        
+    </h:body>
+</html>
+

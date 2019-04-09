@@ -6,20 +6,23 @@
     <h:head>
         <title>Friends Book</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"></link>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
     </h:head>
     <h:body style="background-color: #e9ebee">
         <nav class="navbar navbar-dark" style="background-color: #3f5c9a;">
-            <h:form>
-                <h:commandLink class="navbar-brand" action="index">Friends Book</h:commandLink>
-            </h:form>
-            <h:form class="form-inline">
-                <h:inputText class="form-control mr-sm-2" required="true" requiredMessage="User name cannot be Empty"></h:inputText>
-                <h:inputSecret class="form-control mr-sm-2" required="true" requiredMessage="Password cannot be Empty"></h:inputSecret>
-                <h:commandButton class="btn btn-primary my-2 my-sm-0" value="Login" ></h:commandButton>
-                <br/>
-            </h:form>
+            <div class="container">
+                <h:form>
+                    <h:commandLink class="navbar-brand" action="index"><i class="fas fa-users"></i> Friends Book</h:commandLink>
+                </h:form>
+                <h:form class="form-inline">
+                    <h:inputText class="form-control mr-sm-2" required="true" requiredMessage="User name cannot be Empty"></h:inputText>
+                    <h:inputSecret class="form-control mr-sm-2" required="true" requiredMessage="Password cannot be Empty"></h:inputSecret>
+                    <h:commandButton class="btn btn-primary my-2 my-sm-0" value="Login" ></h:commandButton>
+                    <br/>
+                </h:form>
+            </div>
         </nav>
         
         <div class="container" >
