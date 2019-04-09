@@ -1,12 +1,136 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
-        <title>Facelet Title</title>
+        <title>Friends Book</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
     </h:head>
-    <h:body>
-        Hello from Facelets
+    <h:body style="background-color: #e9ebee">
+        <nav class="navbar navbar-dark" style="background-color: #3f5c9a;">
+            <h:form>
+                <h:commandLink class="navbar-brand" action="index">Friends Book</h:commandLink>
+            </h:form>
+            <h:form class="form-inline">
+                <h:inputText class="form-control mr-sm-2" required="true" requiredMessage="User name cannot be Empty"></h:inputText>
+                <h:inputSecret class="form-control mr-sm-2" required="true" requiredMessage="Password cannot be Empty"></h:inputSecret>
+                <h:commandButton class="btn btn-primary my-2 my-sm-0" value="Login" ></h:commandButton>
+                <br/>
+            </h:form>
+        </nav>
+        
+        <div class="container" >
+            <br/>
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <h:messages class="alert alert-danger"></h:messages>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="col-md-12">
+                            <h:message for="error"> </h:message>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-7">
+                    <div class="form-row">
+                        <div class="col-12">
+                            <h2>Create a New Account</h2>
+                        </div>
+                        <div class="col-12">
+                        </div>
+                    </div>
+                    <h:form>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <h:outputLabel for="firstName"> First Name</h:outputLabel>
+                                <h:inputText class="form-control" id="firstName" required="true" requiredMessage="First Name cannot be empty"></h:inputText>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <h:outputLabel for="lastName"> Last Name</h:outputLabel>
+                                <h:inputText class="form-control" id="lastName" required="true" requiredMessage="Last Name cannot be empty"></h:inputText>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <h:outputLabel for="userId">User Id</h:outputLabel>
+                                <h:inputText class="form-control" id="userId" required="true" requiredMessage="User ID cannot be empty"></h:inputText>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <h:outputLabel for="password"> Password</h:outputLabel>
+                                <h:inputSecret class="form-control" id="password" required="true" requiredMessage="Password cannot be empty"></h:inputSecret>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <h:outputLabel for="school">School</h:outputLabel>
+                                <h:inputText class="form-control" id="school" required="true" requiredMessage="School Name cannot be empty"></h:inputText>
+                            </div>
+                            <div class="form-group col-md-6">
+                                <h:outputLabel for="gender">Gender </h:outputLabel>
+                                <h:selectOneRadio class="form-control" id="gender" required="true" requiredMessage="Gender cannot be empty">
+                                    <f:selectItem itemValue="male" itemLabel="Male"></f:selectItem>
+                                    <f:selectItem itemValue="female" itemLabel="Female"></f:selectItem>
+                                </h:selectOneRadio>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <h:outputLabel for="month">Month </h:outputLabel>
+                                <h:selectOneMenu class="form-control" id="month" required="true" requiredMessage="Month cannot be empty">
+                                    <f:selectItem itemValue="0" itemLabel="Select Month"></f:selectItem>
+                                    <f:selectItem itemValue="1" itemLabel="January"></f:selectItem>
+                                    <f:selectItem itemValue="2" itemLabel="February"></f:selectItem>
+                                    <f:selectItem itemValue="3" itemLabel="March"></f:selectItem>
+                                    <f:selectItem itemValue="4" itemLabel="April"></f:selectItem>
+                                    <f:selectItem itemValue="5" itemLabel="May"></f:selectItem>
+                                    <f:selectItem itemValue="6" itemLabel="June"></f:selectItem>
+                                    <f:selectItem itemValue="7" itemLabel="July"></f:selectItem>
+                                    <f:selectItem itemValue="8" itemLabel="August"></f:selectItem>
+                                    <f:selectItem itemValue="9" itemLabel="September"></f:selectItem>
+                                    <f:selectItem itemValue="10" itemLabel="October"></f:selectItem>
+                                    <f:selectItem itemValue="11" itemLabel="November"></f:selectItem>
+                                    <f:selectItem itemValue="12" itemLabel="December"></f:selectItem>
+                                </h:selectOneMenu>
+                            </div>
+                            <div class="form-group col-md-2">
+                                <h:outputLabel for="day">Day</h:outputLabel>
+                                <h:inputText class="form-control" id="day" required="true" requiredMessage="Day cannot be empty" maxlength="2" >
+                                    <f:convertNumber integerOnly="true" type="number" />
+                                </h:inputText>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <h:outputLabel for="year">Year </h:outputLabel>
+                                <h:inputText class="form-control" id="year" required="true" requiredMessage="Year cannot be empty" maxlength="4">
+                                    <f:convertNumber integerOnly="true" type="number" />
+                                </h:inputText>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group col-md-12">
+                                <h:outputLabel for="email">Email </h:outputLabel>
+                                <h:inputText class="form-control" id="email" required="true" requiredMessage="Email cannot be empty" validatorMessage="EL is not valid">
+                                    <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                                </h:inputText>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="col-md-8">
+
+                            </div>
+                            <div class="col-md-4">
+                                <h:commandButton class="form-control btn btn-outline-success" action="#{newJSFManagedBean.test()}" value="Register"></h:commandButton>
+                            </div>
+                        </div>
+                    </h:form>
+                </div>
+            </div>
+        </div>
     </h:body>
 </html>
 
