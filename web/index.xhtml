@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
     <h:head>
         <title>Friends Book</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
@@ -17,9 +18,10 @@
                     <h:commandLink class="navbar-brand" action="index"><i class="fas fa-users"></i> Friends Book</h:commandLink>
                 </h:form>
                 <h:form class="form-inline">
-                    <h:inputText class="form-control mr-sm-2" required="true" requiredMessage="User name cannot be Empty"></h:inputText>
-                    <h:inputSecret class="form-control mr-sm-2" required="true" requiredMessage="Password cannot be Empty"></h:inputSecret>
-                    <h:commandButton class="btn btn-primary my-2 my-sm-0" value="Login" ></h:commandButton>
+                    <h:inputText class="form-control mr-sm-2" required="true" requiredMessage="User name cannot be Empty" a:placeholder='User ID'></h:inputText>
+                    <h:inputSecret class="form-control mr-sm-2" required="true" requiredMessage="Password cannot be Empty" a:placeholder='Password'></h:inputSecret>
+                    <!--<h:commandButton class="btn btn-primary my-2 my-sm-0" value="Login" ></h:commandButton>-->
+                    <h:outputLink class="form-control my-2 my-sm-0 ml-sm-2" value="home.xhtml" ><i class="fas fa-sign-in-alt"></i> Log In</h:outputLink>
                     <br/>
                 </h:form>
             </div>
