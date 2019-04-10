@@ -9,6 +9,11 @@
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"></link>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+        <style>
+            .card-body{
+                padding: 1rem !important;
+            }
+        </style>
     </h:head>
     <h:body style="background-color: #e9ebee">
         <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3f5c9a;">
@@ -66,8 +71,11 @@
                     <!--middle column to display latest posts with comment 
                     and create new comment
                     and create new post-->
+                    <!--<div class="card mt-sm-2">
+                        <h6 class="card-header"><i class="fas fa-user"></i> Welcome #{loginBean.user.name}!!</h6>
+                    </div>-->
                     <div class="card">
-                        <h6 class="card-header"><i class="far fa-edit"></i> What's on your mind?</h6>
+                        <h6 class="card-header"><i class="far fa-edit"></i> Welcome #{loginBean.user.name}!! <!--What's on your mind?--></h6>
                         <div class="card-body">
                             <h:form>
                                 <div class="form-group mb-2">
@@ -139,10 +147,12 @@
                             <li class="list-group-item">Vestibulum at eros</li>
                         </ul>
                         <div class="card-body">
-                            <h:form class="form-inline">
+                            <h:form>
                                 <div class="form-group mb-2">
-                                    <h:inputText class="form-control mx-sm-1" a:placeholder='Search Hash tag'></h:inputText>
-                                    <h:commandButton class="btn btn-primary" value="Search"></h:commandButton>
+                                    <h:inputText class="form-control" a:placeholder='Search Hash tag'></h:inputText>
+                                </div>
+                                <div class="form-group mb-2">
+                                    <h:commandButton class="form-control btn btn-primary" value="Search"></h:commandButton>
                                 </div>
                             </h:form>
                             <div>

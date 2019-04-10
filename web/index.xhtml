@@ -18,10 +18,9 @@
                     <h:commandLink class="navbar-brand" action="index"><i class="fas fa-users"></i> Friends Book</h:commandLink>
                 </h:form>
                 <h:form class="form-inline">
-                    <h:inputText class="form-control mr-sm-2" required="true" requiredMessage="User name cannot be Empty" a:placeholder='User ID'></h:inputText>
-                    <h:inputSecret class="form-control mr-sm-2" required="true" requiredMessage="Password cannot be Empty" a:placeholder='Password'></h:inputSecret>
-                    <!--<h:commandButton class="btn btn-primary my-2 my-sm-0" value="Login" ></h:commandButton>-->
-                    <h:outputLink class="form-control my-2 my-sm-0 ml-sm-2" value="home.xhtml" ><i class="fas fa-sign-in-alt"></i> Log In</h:outputLink>
+                    <h:inputText class="form-control mr-sm-2" value="#{loginBean.userId}" required="true" requiredMessage="User name cannot be Empty" a:placeholder='User ID'></h:inputText>
+                    <h:inputSecret class="form-control mr-sm-2" value="#{loginBean.password}" required="true" requiredMessage="Password cannot be Empty" a:placeholder='Password'></h:inputSecret>
+                    <h:commandButton class="form-control btn btn-light my-2 my-sm-0" value="Login" action="#{loginBean.login()}"></h:commandButton>
                     <br/>
                 </h:form>
             </div>
@@ -38,7 +37,8 @@
                     </div>
                     <div class="form-row">
                         <div class="col-md-12">
-                            <h:message for="error"> </h:message>
+                            <h:message for="error" class="alert alert-danger"> </h:message>
+                            <h:message for="success" class="alert alert-success"></h:message>
                         </div>
                     </div>
                 </div>
@@ -54,31 +54,31 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <!--<h:outputLabel for="firstName"> First Name</h:outputLabel>-->
-                                <h:inputText class="form-control" id="firstName" required="true" requiredMessage="First Name cannot be empty" a:placeholder="First Name"></h:inputText>
+                                <h:inputText value="#{registerBean.firstName}" class="form-control" id="firstName" required="true" requiredMessage="First Name cannot be empty" a:placeholder="First Name"></h:inputText>
                             </div>
                             <div class="form-group col-md-6">
                                 <!--<h:outputLabel for="lastName"> Last Name</h:outputLabel>-->
-                                <h:inputText class="form-control" id="lastName" required="true" requiredMessage="Last Name cannot be empty" a:placeholder="Last Name"></h:inputText>
+                                <h:inputText value="#{registerBean.lastName}" class="form-control" id="lastName" required="true" requiredMessage="Last Name cannot be empty" a:placeholder="Last Name"></h:inputText>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <!--<h:outputLabel for="userId">User Id</h:outputLabel>-->
-                                <h:inputText class="form-control" id="userId" required="true" requiredMessage="User ID cannot be empty" a:placeholder="Login ID"></h:inputText>
+                                <h:inputText class="form-control" value="#{registerBean.userId}" id="userId" required="true" requiredMessage="User ID cannot be empty" a:placeholder="Login ID"></h:inputText>
                             </div>
                             <div class="form-group col-md-6">
                                 <!--<h:outputLabel for="password"> Password</h:outputLabel>-->
-                                <h:inputSecret class="form-control" id="password" required="true" requiredMessage="Password cannot be empty" a:placeholder="Password"></h:inputSecret>
+                                <h:inputSecret class="form-control" value="#{registerBean.password}" id="password" required="true" requiredMessage="Password cannot be empty" a:placeholder="Password"></h:inputSecret>
                             </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <!--<h:outputLabel for="school">School</h:outputLabel>-->
-                                <h:inputText class="form-control" id="school" required="true" requiredMessage="School Name cannot be empty" a:placeholder="School Name"></h:inputText>
+                                <h:inputText class="form-control" id="school" value="#{registerBean.school}" required="true" requiredMessage="School Name cannot be empty" a:placeholder="School Name"></h:inputText>
                             </div>
                             <div class="form-group col-md-6">
                                 <!--<h:outputLabel for="gender">Gender </h:outputLabel>-->
-                                <h:selectOneRadio class="form-control" id="gender" required="true" requiredMessage="Gender cannot be empty">
+                                <h:selectOneRadio class="form-control" id="gender" value="#{registerBean.gender}" required="true" requiredMessage="Gender cannot be empty">
                                     <f:selectItem itemValue="male" itemLabel="Male"></f:selectItem>
                                     <f:selectItem itemValue="female" itemLabel="Female"></f:selectItem>
                                 </h:selectOneRadio>
@@ -87,7 +87,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <!--<h:outputLabel for="month">Month </h:outputLabel>-->
-                                <h:selectOneMenu class="form-control" id="month" required="true" requiredMessage="Month cannot be empty">
+                                <h:selectOneMenu class="form-control" id="month" required="true" value="#{registerBean.month}" requiredMessage="Month cannot be empty">
                                     <f:selectItem itemValue="0" itemLabel="Select Month"></f:selectItem>
                                     <f:selectItem itemValue="1" itemLabel="January"></f:selectItem>
                                     <f:selectItem itemValue="2" itemLabel="February"></f:selectItem>
@@ -105,13 +105,13 @@
                             </div>
                             <div class="form-group col-md-2">
                                 <!--<h:outputLabel for="day">Day</h:outputLabel>-->
-                                <h:inputText class="form-control" id="day" required="true" requiredMessage="Day cannot be empty" maxlength="2" a:placeholder="Day">
+                                <h:inputText class="form-control" id="day" required="true" value="#{registerBean.day}" requiredMessage="Day cannot be empty" maxlength="2" a:placeholder="Day">
                                     <f:convertNumber integerOnly="true" type="number" />
                                 </h:inputText>
                             </div>
                             <div class="form-group col-md-4">
                                 <!--<h:outputLabel for="year">Year </h:outputLabel>-->
-                                <h:inputText class="form-control" id="year" required="true" requiredMessage="Year cannot be empty" maxlength="4" a:placeholder="Year">
+                                <h:inputText class="form-control" id="year" required="true" value="#{registerBean.year}" requiredMessage="Year cannot be empty" maxlength="4" a:placeholder="Year">
                                     <f:convertNumber integerOnly="true" type="number" />
                                 </h:inputText>
                             </div>
@@ -119,7 +119,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-12">
                                 <!--<h:outputLabel for="email">Email </h:outputLabel>-->
-                                <h:inputText class="form-control" id="email" required="true" requiredMessage="Email cannot be empty" validatorMessage="EL is not valid" a:placeholder="Email Id">
+                                <h:inputText class="form-control" id="email" required="true" value="#{registerBean.email}" requiredMessage="Email cannot be empty" validatorMessage="EL is not valid" a:placeholder="Email Id">
                                     <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
                                 </h:inputText>
                             </div>
@@ -129,7 +129,7 @@
 
                             </div>
                             <div class="col-md-4">
-                                <h:commandButton class="form-control btn btn-outline-success" action="#{newJSFManagedBean.test()}" value="Register"></h:commandButton>
+                                <h:commandButton class="form-control btn btn-outline-success" action="#{registerBean.registerUser()}" value="Register"></h:commandButton>
                             </div>
                         </div>
                     </h:form>
