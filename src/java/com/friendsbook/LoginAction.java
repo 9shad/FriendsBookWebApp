@@ -27,7 +27,7 @@ public class LoginAction implements Serializable {
     public LoginAction() {
     }
     
-    private String userId;
+    private String userId;   
     private String password;
     private UserFriend user;
 
