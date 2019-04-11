@@ -2,7 +2,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Home Page</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
@@ -50,9 +51,6 @@
                                     <h:commandButton class="form-control btn btn-primary" value="Send Request"></h:commandButton>
                                 </div>
                             </h:form>
-                            <div>
-                                <h:message class="alert alert-danger my-sm-2" for="friendRequestError"></h:message>
-                            </div>
                         </div>
                         <ul class="list-group list-group-flush">
                             <!--display few friends and in a link fashion-->
@@ -74,16 +72,16 @@
                     <div class="card">
                         <h6 class="card-header"><i class="far fa-edit"></i> Welcome #{loginBean.user.name}!! <!--What's on your mind?--></h6>
                         <div class="card-body">
-                            <h:form>
+                            <h:form id="postForm">
                                 <div class="form-group mb-2">
-                                    <h:inputTextarea class="form-control mx-sm-1" rows="2" a:maxlength='255' a:placeholder='Whats on your mind?'></h:inputTextarea>
+                                    <h:inputTextarea class="form-control mx-sm-1" rows="2" a:maxlength='255' value="#{postBean.postDescription}" a:placeholder='Whats on your mind?' required="true" requiredMessage="Post cannot be empty!"></h:inputTextarea>
                                 </div>
                                 <div class="form-group mb-2">
-                                    <h:commandButton class="form-control btn btn-primary" value="Post"></h:commandButton>
+                                    <h:commandButton class="form-control btn btn-primary" value="Post" action="#{postBean.createPost(loginBean.user.userId)}"></h:commandButton>
                                 </div>
                             </h:form>
                             <div>
-                                <h:message class="alert alert-danger my-sm-2" for="postError"></h:message>
+                                <h:messages class="alert alert-warning my-sm-2"></h:messages>
                             </div>
                         </div>
                     </div><!-- end of post card-->
@@ -91,9 +89,6 @@
                     <!-- Featured posts from friends-->
                     <div class="card mt-sm-2">
                         <h6 class="card-header"><i class="fas fa-user-edit"></i> Featured Posts</h6>
-                        <div>
-                            <h:message class="alert alert-danger my-sm-2" for="commentError"></h:message>
-                        </div>
                     </div><!--end of featured post tag-->
                     
                     <!-- iterate on post and create separate cards-->
@@ -110,56 +105,7 @@
                             </div>
                           </h:form>
                         </div>
-                    </div> <!--end of friend post card 2-->
-                    <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">User name</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <footer class="blockquote-footer mb-sm-2">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                          <footer class="blockquote-footer mb-sm-2">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                            <h:form>
-                                <div class="form-group mb-2">
-                                    <h:inputText class="form-control" maxlength="150" a:placeholder='Comment!'></h:inputText>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <h:commandButton class="form-control btn btn-primary" value="Comment"></h:commandButton>
-                                </div>
-                            </h:form>
-                        </div>
-                    </div> <!--end of friend post card 2-->
-                    <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">User name</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <footer class="blockquote-footer mb-sm-2">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                          <footer class="blockquote-footer mb-sm-2">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                            <h:form>
-                                <div class="form-group mb-2">
-                                    <h:inputText class="form-control" maxlength="150" a:placeholder='Comment!'></h:inputText>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <h:commandButton class="form-control btn btn-primary" value="Comment"></h:commandButton>
-                                </div>
-                            </h:form>
-                        </div>
-                    </div> <!--end of friend post card 2-->
-                    <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">User name</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <footer class="blockquote-footer mb-sm-2">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                          <footer class="blockquote-footer mb-sm-2">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                            <h:form>
-                                <div class="form-group mb-2">
-                                    <h:inputText class="form-control" maxlength="150" a:placeholder='Comment!'></h:inputText>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <h:commandButton class="form-control btn btn-primary" value="Comment"></h:commandButton>
-                                </div>
-                            </h:form>
-                        </div>
-                    </div> <!--end of friend post card 2-->
-                    
+                    </div> <!--end of friend post card 2-->                                        
                 </div><!--end of middle column-->
                 
                 
@@ -170,27 +116,34 @@
                     <div class="card sticky-top">
                         <h5 class="card-header"><i class="fab fa-slack-hash"></i> Featured Hash Tag</h5>
                         <ul class="list-group list-group-flush">
-                            <!--display top 3 tags-->
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
+                            <!--display top 5 tags-->
+                            #{hashtagBean.getTrendingHashTags()}
+                            <h:dataTable value="#{hashtagBean.trendingHashTag}" var="hashtag" style="width:100%">
+                                <h:column>
+                                    <!--<f:facet name="header">header</f:facet>-->
+                                    <li class="list-group-item">
+                                        <h:form>
+                                            <h:outputLink value="hashtagPosts.xhtml">
+                                                <h:outputText value="#{hashtag}" />
+                                                <f:param name="hashtag" value="#{hashtag}"/>
+                                            </h:outputLink>
+                                        </h:form>
+                                    </li>
+                                </h:column>
+                            </h:dataTable>
                         </ul>
                         <div class="card-body">
                             <h:form>
                                 <div class="form-group mb-2">
-                                    <h:inputText class="form-control" a:placeholder='Search Hash tag'></h:inputText>
+                                    <h:inputText class="form-control" value="#{hashtagBean.userInputHashtag}" id="hashtagError" a:placeholder='Search Hash tag' required="true" requiredMessage="Hashtag field cannot be empty"></h:inputText>
                                 </div>
                                 <div class="form-group mb-2">
-                                    <h:commandButton class="form-control btn btn-primary" value="Search"></h:commandButton>
+                                    <h:commandButton class="form-control btn btn-primary" value="Search" action="#{hashtagBean.showHashtagPostsByFriends(loginBean.user.userId)}"></h:commandButton>
                                 </div>
                             </h:form>
-                            <div>
-                                <h:message class="alert alert-danger my-sm-2" for="hashtagError"></h:message>
-                            </div>
                         </div>
                     </div>
                 </div><!--end of right column-->
-                
                 
             </div><!--end of row-->
         </div> <!--End of container-->

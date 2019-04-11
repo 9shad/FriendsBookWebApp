@@ -62,12 +62,12 @@ public class HashTagDAO {
 
 	//Have not considered ties. so it will display top 3 results at the moment.
 	public static List<String> getMostTrendingHashtagDAO() {
-		List<String> top3HashTags = new ArrayList<>();
+		List<String> topHashTags = new ArrayList<>();
 		
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		final String QUERY = "select hashtag, count(1) from user_hashtag group by hashtag order by 2 desc limit 3";
+		final String QUERY = "select hashtag, count(1) from user_hashtag group by hashtag order by 2 desc limit 5";
 		
 		try {
 			con = Connector.getConnection();
@@ -75,7 +75,7 @@ public class HashTagDAO {
 			rs = ps.executeQuery();
 			
 			while(rs.next()) {
-				top3HashTags.add(rs.getString("hashtag"));
+				topHashTags.add(rs.getString("hashtag"));
 			}
 			
 		} catch (SQLException e) {
@@ -89,6 +89,6 @@ public class HashTagDAO {
 			}
 		}
 		
-		return top3HashTags;
+		return topHashTags;
 	}
 }
