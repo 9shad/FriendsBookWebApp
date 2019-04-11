@@ -20,7 +20,8 @@
                 <h:form class="form-inline">
                     <h:inputText class="form-control mr-sm-2" value="#{loginBean.userId}" required="true" requiredMessage="User name cannot be Empty" a:placeholder='User ID'></h:inputText>
                     <h:inputSecret class="form-control mr-sm-2" value="#{loginBean.password}" required="true" requiredMessage="Password cannot be Empty" a:placeholder='Password'></h:inputSecret>
-                    <h:commandButton class="form-control btn btn-light my-2 my-sm-0" value="Login" action="#{loginBean.login()}"></h:commandButton>
+                    <!--<h:commandButton class="form-control btn btn-light my-2 my-sm-0" value="Login" ></h:commandButton>-->
+                    <h:commandLink  class="form-control my-2 my-sm-0 ml-sm-2" action="#{loginBean.login()}"><i class="fas fa-sign-in-alt"></i> Log In</h:commandLink >
                     <br/>
                 </h:form>
             </div>
@@ -32,13 +33,7 @@
                 <div class="col-md-5">
                     <div class="form-row">
                         <div class="col-md-12">
-                            <h:messages class="alert alert-danger"></h:messages>
-                        </div>
-                    </div>
-                    <div class="form-row">
-                        <div class="col-md-12">
-                            <h:message for="error" class="alert alert-danger"> </h:message>
-                            <h:message for="success" class="alert alert-success"></h:message>
+                            <h:messages class="alert alert-info"></h:messages>
                         </div>
                     </div>
                 </div>

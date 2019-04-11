@@ -3,6 +3,8 @@ package com.friendsbook.datasource;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class Connector {
 
@@ -13,13 +15,19 @@ public class Connector {
 	private static Connection connection;
 	
 	private Connector() throws SQLException{
-		connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+                connection = DriverManager.getConnection(URL, USERNAME,PASSWORD);
+            } catch (ClassNotFoundException ex) {
+                ex.printStackTrace();
+                Logger.getLogger(Connector.class.getName()).log(Level.SEVERE, null, ex);
+            }
 	}
 	
 	public static Connection getConnection() throws SQLException{
 		
 		if(connection == null){
-			new Connector();
+                    new Connector();
 		}
 		return connection;
 	}

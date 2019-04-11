@@ -36,7 +36,7 @@ public class LoginAction implements Serializable {
     }
     
     public String login(){
-        UserFriend user = LoginDAO.checkUserCredentials(userId, password);
+        this.user = LoginDAO.checkUserCredentials(userId, password);
         if(user == null){
             FacesContext.getCurrentInstance().addMessage("error", new FacesMessage("Invalid Credentials, Please try again!"));
             return "index.xhtml";

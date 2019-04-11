@@ -36,8 +36,8 @@ public class RegisterAction {
     private String school;
     private String gender;
     private int month;
-    private int day;
-    private int year;
+    private String day;
+    private String year;
     private String email;
 
     public String getFirstName() {
@@ -96,19 +96,19 @@ public class RegisterAction {
         this.month = month;
     }
 
-    public int getDay() {
+    public String getDay() {
         return day;
     }
 
-    public void setDay(int day) {
+    public void setDay(String day) {
         this.day = day;
     }
 
-    public int getYear() {
+    public String getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public void setYear(String year) {
         this.year = year;
     }
 
@@ -123,13 +123,17 @@ public class RegisterAction {
     public String registerUser(){
         this.user = new User();
         user.setName(this.firstName +" "+this.lastName);
-        user.setPassword(EncryptPassword.cryptWithMD5(user.getPassword()));
+        user.setPassword(EncryptPassword.cryptWithMD5(this.password));
         user.setGender(this.gender);
         user.setUserId(this.userId);
         user.setEmail(this.email);
         user.setSchool(this.school);
         //YYYY-MM-dd
-        user.setBirthdayDate(LocalDate.of(this.year, this.month, this.day));
+        try{
+            user.setBirthdayDate(LocalDate.of(Integer.parseInt(this.year), this.month, Integer.parseInt(this.day)));
+        }catch(Exception e){
+            FacesContext.getCurrentInstance().addMessage("error", new FacesMessage("Invalid Date!"));
+        }
         String result = this.validateUserId(user.getUserId());
         if( result != null){
             FacesContext.getCurrentInstance().addMessage("error", new FacesMessage(result));
@@ -143,6 +147,16 @@ public class RegisterAction {
         }
         
         if(RegisterUserDAO.addUserToDB(user)){
+            this.setEmail(null);
+            this.setFirstName(null);
+            this.setLastName(null);
+            this.setPassword(null);
+            this.setSchool(null);
+            this.setUserId(null);
+            this.setGender(null);
+            this.setYear(null);
+            this.setMonth(0);
+            this.setDay(null);
             FacesContext.getCurrentInstance().addMessage("success", new FacesMessage("Regrestration Successful!"));
         }else{
             FacesContext.getCurrentInstance().addMessage("error", new FacesMessage("Oops!! something went wrong, Please try again!"));

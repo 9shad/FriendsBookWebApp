@@ -7,6 +7,8 @@ import java.sql.SQLException;
 
 import com.friendsbook.pojo.User;
 import com.friendsbook.datasource.Connector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RegisterUserDAO {
 	
@@ -65,8 +67,9 @@ public class RegisterUserDAO {
 			if(rs.next() && rs.getInt(1) >0){
 				return true;
 			}
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+                        //Logger.getLogger(RegisterUserDAO.class.getName()).log(Level.SEVERE, null, ex);
 		}finally{
 			try {
 				rs.close();
