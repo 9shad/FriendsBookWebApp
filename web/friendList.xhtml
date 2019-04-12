@@ -47,23 +47,17 @@
                     </div><!--end of Friend List header-->
                     <div class="card mt-sm-2">
                         <h:form>
-                            <!--<h:panelGrid columns="3" style="width:100%">
+                                <!--<h:panelGrid columns="3" style="width:100%">
                                 <h:column>-->
-                                <h:dataTable value="#{friendsBean.friendList}" var="friend" style="width:100%">
+                                <h:dataTable value="#{friendsBean.friends}" var="friends" style="width:100%">
                                     <h:column>
-                                        <li class="list-group-item mx-sm-1 my-sm-1">
-                                            <h:commandLink value="#{friend}" action="#{friendsBean.generateFriendProfile(friend)}"></h:commandLink>
-                                        </li>
-                                    </h:column>
-                                    <h:column>
-                                        <li class="list-group-item mx-sm-1 my-sm-1">
-                                            <h:commandLink value="#{friend}" action="#{friendsBean.generateFriendProfile(friend)}"></h:commandLink>
-                                        </li>
-                                    </h:column>
-                                    <h:column>
-                                        <li class="list-group-item mx-sm-2 my-sm-1">
-                                            <h:commandLink value="#{friend}" action="#{friendsBean.generateFriendProfile(friend)}"></h:commandLink>
-                                        </li>
+                                        <h:dataTable value="#{friends}" var="friend" style="width:100%">
+                                            <h:column>
+                                                <li class="list-group-item mx-sm-1 my-sm-1">
+                                                    <h:commandLink value="#{friend}" action="#{friendsBean.generateFriendProfile(friend)}"></h:commandLink>
+                                                </li>
+                                            </h:column>
+                                        </h:dataTable>
                                     </h:column>
                                 </h:dataTable>
                                 <!--</h:column>
@@ -74,17 +68,26 @@
                 </div><!--end of left column-->
                 
                 <div class="col-md-5">
-                    <!-- right column to display friends -->
+                    <!-- right column to display friends profile-->
                     <div class="card sticky-top">
                         <h5 class="card-header"><i class="fas fa-user-edit"></i> Profile Information</h5>
-                        <div class="card-body">
-                        </div>
                         <ul class="list-group list-group-flush">
-                            <!--display few friends and in a link fashion-->
-                            <li class="list-group-item">Friend 1</li>
-                            <li class="list-group-item">Friend 2</li>
-                            <li class="list-group-item">Friend 3</li>
-                            <li class="list-group-item">View More</li>
+                            <h:dataTable value="#{friendsBean.friendProfile}" var="profile" style="width:100%" rows="1">
+                                <h:column>
+                                    <li class="list-group-item">
+                                        <strong>Name: </strong> #{profile.name}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Gender: </strong> #{profile.gender}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>Birthday: </strong> #{profile.birthdayDate}
+                                    </li>
+                                    <li class="list-group-item">
+                                        <strong>School: </strong> #{profile.school}
+                                    </li>
+                                </h:column>
+                            </h:dataTable>
                         </ul>
                     </div>
                 </div><!--end of right column-->

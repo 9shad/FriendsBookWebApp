@@ -10,6 +10,7 @@ import com.friendsbook.pojo.UserFriend;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
@@ -29,7 +30,8 @@ public class FriendsAction implements Serializable {
     }
         
     private List<String> friendList;
-    private UserFriend friendProfile;
+    private List<UserFriend> friendProfile;
+    private List<List<String>> friends;
 
     public List<String> getFriendList() {
         return friendList;
@@ -38,26 +40,57 @@ public class FriendsAction implements Serializable {
     public void setFriendList(List<String> friendList) {
         this.friendList = friendList;
     }
+
+    public List<List<String>> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(List<List<String>> friends) {
+        this.friends = friends;
+    }
     
     public void generateFriendsList(String userId){
         if(friendList == null || friendList.isEmpty()){
             friendList = FriendDAO.getFriendList(userId);
-            
         }
+        List<String> sortedList = new ArrayList<>();
+        sortedList.addAll(friendList);
+        List<List<String>> allFriends = new ArrayList<>();
+        List<String> list = null;
+        for(int i = 0;i<sortedList.size();i++){
+           if(i%3 == 0){
+               if(list!=null)
+                   allFriends.add(list);
+               list = new ArrayList<>(3);
+               list.add(sortedList.get(i));
+           } else{
+               if(list!=null){
+                   list.add(sortedList.get(i));
+               }
+           }
+           if(i+1 == sortedList.size()){
+               allFriends.add(list);
+           }
+        }
+        friends = allFriends;
     }
 
-    public UserFriend getFriendProfile() {
+    public List<UserFriend> getFriendProfile() {
         return friendProfile;
     }
 
-    public void setFriendProfile(UserFriend friendProfile) {
+    public void setFriendProfile(ArrayList<UserFriend> friendProfile) {
         this.friendProfile = friendProfile;
     }
     
     public String generateFriendProfile(String userId){
-        friendProfile = null;
-        friendProfile = FriendDAO.getFriendProfile(userId);
-        if(friendProfile != null){
+        if(friendProfile == null){
+            friendProfile = new ArrayList<>();
+        }else{
+            friendProfile.clear();
+        }
+        friendProfile.add(FriendDAO.getFriendProfile(userId));
+        if(friendProfile != null && !friendList.isEmpty()){
             return "friendList.xhtml";
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Oops! cannot load profile information for "+userId));
@@ -66,7 +99,8 @@ public class FriendsAction implements Serializable {
     }
 
     public String viewAllFriends(){
-        friendProfile = null;
+        if(friendProfile != null)
+            friendProfile.clear();
         return "friendList.xhtml";
     }
 
