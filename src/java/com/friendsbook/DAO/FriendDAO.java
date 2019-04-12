@@ -98,7 +98,7 @@ public class FriendDAO {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		UserFriend profileInfo = null;
-		final String QUERY = "select user_id, name, gender, school_name, birthday from useraccount where user_id = ?";
+		final String QUERY = "select user_id, name, gender, school_name, birthday, email from useraccount where user_id = ?";
 		
 		try {
 			con = Connector.getConnection();
@@ -111,7 +111,8 @@ public class FriendDAO {
 						rs.getString("name"),
 						rs.getString("gender"),
 						rs.getString("school_name"),
-						rs.getDate("birthday").toLocalDate()
+						rs.getDate("birthday").toLocalDate(),
+                                                rs.getString("email")
 				);
 			}
 		} catch (SQLException e) {			

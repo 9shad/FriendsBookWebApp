@@ -32,7 +32,7 @@ public class LoginDAO {
 				user.setSchool(rs.getString("school_name"));
 				user.setBirthdayDate(rs.getDate("birthday").toLocalDate());
 				//user.setAccountCreatedTimeStamp(rs.getString("account_created_on"));//change this to timestame from string later
-				//user.setEmail(rs.getString("email"));
+				user.setEmail(rs.getString("email"));
 				return user;
 			}
 		} catch (SQLException e) {

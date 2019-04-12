@@ -8,17 +8,26 @@ public class UserFriend {
 	private String gender;
 	private String school;
 	private LocalDate birthdayDate;
+        private String email;
 	
 	public UserFriend() {
 		
 	}
 	
-	public UserFriend(String userId, String name, String gender, String school, LocalDate birthdayDate) {
+	public UserFriend(String userId, String name, String gender, String school, LocalDate birthdayDate,String email) {
 		this.userId = userId;
 		this.name = name;
 		this.gender = gender;
 		this.school = school;
 		this.birthdayDate = birthdayDate;
+                this.email = email;
+	}
+        
+        public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 	
 	public void setUserId(String userId) {

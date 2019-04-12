@@ -70,31 +70,84 @@
                 </div><!--end of left column-->
                 
                 <div class="col-md-6">
-                    <!--middle column to display-->
-                    <!-- Hash-tag posts from friends-->
+                    <!--middle column to display profile update information-->
                     <div class="card">
-                        <h6 class="card-header"><i class="fas fa-user-edit"></i> Posts with <strong>#{hashtagBean.userInputHashtag}</strong> from your friends.</h6>
+                        <h6 class="card-header"><i class="fas fa-user-edit"></i> Profile Information</h6>
                         <div>
                             <h:messages class="alert alert-warning my-sm-2 mx-sm-2"></h:messages>
                         </div>
-                    </div><!--end of featured post tag-->
-                    
-                    <!-- iterate on post and create separate cards-->
-                    <h:dataTable value="#{hashtagBean.posts}" var="post" style="width: 100%">
-                        <h:column>
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5 class="card-title">#{post.userId}</h5>
-                                    <p class="card-text">#{post.description}</p>
-                                    <h:dataTable value="#{post.userComments}" var="comment" style="width: 100%">
-                                        <h:column>
-                                            <footer class="blockquote-footer mb-sm-2"><strong>#{comment.userId} says </strong><cite title="Source Title">#{comment.description}</cite></footer>
-                                        </h:column>
-                                    </h:dataTable>
+                        <div class="card-body">
+                            <h:form>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <h:outputLabel for="firstName"> Name</h:outputLabel>
+                                        <h:inputText class="form-control" id="firstName" required="true" value="#{updateProfileBean.userInfo.name}" requiredMessage="Name cannot be empty" a:placeholder="Name"></h:inputText>
+                                    </div>
                                 </div>
-                            </div> <!--end of friend post card-->                                        
-                        </h:column>
-                    </h:dataTable> 
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <h:outputLabel for="school">School</h:outputLabel>
+                                        <h:inputText class="form-control" id="school" required="true" value="#{updateProfileBean.userInfo.school}" requiredMessage="School Name cannot be empty" a:placeholder="School Name"></h:inputText>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <h:outputLabel for="gender">Gender </h:outputLabel>
+                                        <h:selectOneRadio class="form-control" id="gender" required="true" value="#{updateProfileBean.userInfo.gender}" requiredMessage="Gender cannot be empty">
+                                            <f:selectItem itemValue="male" itemLabel="Male"></f:selectItem>
+                                            <f:selectItem itemValue="female" itemLabel="Female"></f:selectItem>
+                                        </h:selectOneRadio>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <h:outputLabel for="month">Month </h:outputLabel>
+                                        <h:selectOneMenu class="form-control" id="month" value="#{updateProfileBean.month}" required="true" requiredMessage="Month cannot be empty">
+                                            <f:selectItem itemValue="0" itemLabel="Select Month"></f:selectItem>
+                                            <f:selectItem itemValue="1" itemLabel="January"></f:selectItem>
+                                            <f:selectItem itemValue="2" itemLabel="February"></f:selectItem>
+                                            <f:selectItem itemValue="3" itemLabel="March"></f:selectItem>
+                                            <f:selectItem itemValue="4" itemLabel="April"></f:selectItem>
+                                            <f:selectItem itemValue="5" itemLabel="May"></f:selectItem>
+                                            <f:selectItem itemValue="6" itemLabel="June"></f:selectItem>
+                                            <f:selectItem itemValue="7" itemLabel="July"></f:selectItem>
+                                            <f:selectItem itemValue="8" itemLabel="August"></f:selectItem>
+                                            <f:selectItem itemValue="9" itemLabel="September"></f:selectItem>
+                                            <f:selectItem itemValue="10" itemLabel="October"></f:selectItem>
+                                            <f:selectItem itemValue="11" itemLabel="November"></f:selectItem>
+                                            <f:selectItem itemValue="12" itemLabel="December"></f:selectItem>
+                                        </h:selectOneMenu>
+                                    </div>
+                                    <div class="form-group col-md-2">
+                                        <h:outputLabel for="day">Day</h:outputLabel>
+                                        <h:inputText class="form-control" id="day" required="true" value="#{updateProfileBean.day}" requiredMessage="Day cannot be empty" maxlength="2" a:placeholder="Day">
+                                            <f:convertNumber integerOnly="true" type="number" />
+                                        </h:inputText>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <h:outputLabel for="year">Year </h:outputLabel>
+                                        <h:inputText class="form-control" id="year" value="#{updateProfileBean.year}" required="true" requiredMessage="Year cannot be empty" maxlength="4" a:placeholder="Year">
+                                            <f:convertNumber integerOnly="true" type="number" />
+                                        </h:inputText>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-12">
+                                        <h:outputLabel for="email">Email </h:outputLabel>
+                                        <h:inputText class="form-control" id="email" required="true" value="#{updateProfileBean.userInfo.email}" requiredMessage="Email cannot be empty" validatorMessage="EL is not valid" a:placeholder="Email Id">
+                                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]" />
+                                        </h:inputText>
+                                    </div>
+                                </div>
+                                <div class="form-row">
+                                    <div class="col-md-8">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <h:commandButton class="form-control btn btn-outline-success" value="Update" action="#{updateProfileBean.updateProfile(loginBean.user)}"></h:commandButton>
+                                    </div>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div><!--end of profile update form-->
+                    
                 </div><!--end of middle column-->
                 
                 
