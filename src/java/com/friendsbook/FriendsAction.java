@@ -6,7 +6,9 @@
 package com.friendsbook;
 
 import com.friendsbook.DAO.FriendDAO;
+import com.friendsbook.DAO.RegisterUserDAO;
 import com.friendsbook.pojo.UserFriend;
+import com.friendsbook.pojo.UserFriendRequest;
 import javax.inject.Named;
 import javax.enterprise.context.SessionScoped;
 import java.io.Serializable;
@@ -32,7 +34,8 @@ public class FriendsAction implements Serializable {
     private List<String> friendList;
     private List<UserFriend> friendProfile;
     private List<List<String>> friends;
-
+    private String toUserId;
+    
     public List<String> getFriendList() {
         return friendList;
     }
@@ -47,6 +50,14 @@ public class FriendsAction implements Serializable {
 
     public void setFriends(List<List<String>> friends) {
         this.friends = friends;
+    }
+
+    public String getToUserId() {
+        return toUserId;
+    }
+
+    public void setToUserId(String toUserId) {
+        this.toUserId = toUserId;
     }
     
     public void generateFriendsList(String userId){
@@ -103,6 +114,31 @@ public class FriendsAction implements Serializable {
             friendProfile.clear();
         return "friendList.xhtml";
     }
-
+    
+    public void sendFriendRequest(String fromUserId){
+        UserFriendRequest obj = new UserFriendRequest();
+        obj.setFromUserId(fromUserId);
+        obj.setToUserId(this.toUserId);
+        if(RegisterUserDAO.checkUserId(toUserId)){
+            if(friendList != null && friendList.contains(toUserId)){ 
+                FacesContext.getCurrentInstance().addMessage("",new FacesMessage(toUserId+ " is already your friend!"));
+                toUserId = null;
+                return;
+            }//else if list is null then we need to hit database to check both users are already friends
+            
+            //this function sends friend request even for already friends
+            //and also sends duplicate friend request if it is not accepted
+            //need to write another DB call to counter this behaviour
+            if(FriendDAO.sendFriendRequestDAO(obj)){
+                this.toUserId=null;
+                FacesContext.getCurrentInstance().addMessage("",new FacesMessage("Friend Request sent successfully!"));
+            }else{
+                FacesContext.getCurrentInstance().addMessage("",new FacesMessage("Oops! something went wrong, Please try again!!"));    
+            }
+        }else{
+            FacesContext.getCurrentInstance().addMessage("",new FacesMessage("Oops!, Invalid User Id!"));    
+        }
+        
+    }
     
 }

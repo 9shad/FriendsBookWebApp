@@ -76,12 +76,12 @@ public class HashtagAction implements Serializable{
             }
                 
             else{
-                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Oops! No posts found from your friends with hashtag "+this.userInputHashtag));
+                FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Oops! No posts from your friends has hashtag "+this.userInputHashtag));
             }
         }else{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Oops! Please try again."));
         }
-        return "home.xhtml";
+        return "";
     }
     public String showHashtagPostsByFriends(String userId, String hashtag){
         this.userInputHashtag = hashtag;

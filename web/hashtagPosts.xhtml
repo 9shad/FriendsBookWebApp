@@ -36,8 +36,7 @@
         
         <div class="container-fluid">
             <br/>
-            <div class="row">
-                
+            <div class="row">                
                 <div class="col-md-3">
                     <!-- left column to display friends -->
                     <div class="card sticky-top">
@@ -45,19 +44,27 @@
                         <div class="card-body">
                             <h:form>
                                 <div class="form-group mb-2">
-                                    <h:inputText class="form-control mx-sm-1" a:placeholder='Friends User ID'></h:inputText>
+                                    <h:inputText class="form-control mx-sm-1" a:placeholder='Friends User ID' value="#{friendsBean.toUserId}"></h:inputText>
                                 </div>
                                 <div class="form-group mb-2">
-                                    <h:commandButton class="form-control btn btn-primary" value="Send Request"></h:commandButton>
+                                    <h:commandButton class="form-control btn btn-primary" value="Send Request" action="#{friendsBean.sendFriendRequest(loginBean.user.userId)}"></h:commandButton>
                                 </div>
                             </h:form>
                         </div>
                         <ul class="list-group list-group-flush">
                             <!--display few friends and in a link fashion-->
-                            <li class="list-group-item">Friend 1</li>
-                            <li class="list-group-item">Friend 2</li>
-                            <li class="list-group-item">Friend 3</li>
-                            <li class="list-group-item">View More</li>
+                            <h:form>
+                                ${friendsBean.generateFriendsList(loginBean.user.userId)}
+                                <h:dataTable value="#{friendsBean.friendList}" var="friend" rows="10" style="width:100%">
+                                    <h:column>
+                                        <li class="list-group-item">
+                                            <h:commandLink value="#{friend}" action="#{friendsBean.generateFriendProfile(friend)}"></h:commandLink>
+                                        </li>
+                                    </h:column>
+                                </h:dataTable>
+                                <li class="list-group-item"><h:commandLink value="View All" action="#{friendsBean.viewAllFriends()}"></h:commandLink></li>
+                            </h:form>
+                            
                         </ul>
                     </div>
                 </div><!--end of left column-->
@@ -71,7 +78,7 @@
                     <div class="card mt-sm-2">
                         <h6 class="card-header"><i class="fas fa-user-edit"></i> Posts with <strong>#{hashtagBean.userInputHashtag}</strong> from your friends.</h6>
                         <div>
-                            <h:messages class="alert alert-warning my-sm-2"></h:messages>
+                            <h:messages class="alert alert-warning my-sm-2 mx-sm-2"></h:messages>
                         </div>
                     </div><!--end of featured post tag-->
                     
