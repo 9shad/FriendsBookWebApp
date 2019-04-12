@@ -69,7 +69,7 @@ public class FriendDAO {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		final String QUERY = "select from_userid, to_userid from friend_request where status = ? and (from_userid = ? or to_userid = ?)";
+		final String QUERY = "select from_userid, to_userid from friend_request where status = ? and (from_userid = ? or to_userid = ?) order by timestamp desc";
 		
 		try {
 			con = Connector.getConnection();

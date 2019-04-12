@@ -8,19 +8,21 @@ package com.friendsbook;
 import com.friendsbook.DAO.HashTagDAO;
 import com.friendsbook.DAO.UserPostDAO;
 import com.friendsbook.pojo.UserPost;
+import java.io.Serializable;
 import java.util.List;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
-import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
+import javax.faces.event.ActionEvent;
 
 /**
  *
  * @author Home
  */
 @Named(value = "hashtagBean")
-@RequestScoped
-public class HashtagAction {
+@SessionScoped
+public class HashtagAction implements Serializable{
 
     /**
      * Creates a new instance of HashtagAction
@@ -68,8 +70,11 @@ public class HashtagAction {
         }
         if(userId != null && this.userInputHashtag!=null){
             this.posts = UserPostDAO.getPostsContainingHashtag(userId, this.userInputHashtag);
-            if(this.posts != null && !this.posts.isEmpty())
+            if(this.posts != null && !this.posts.isEmpty()){
+                //this.setUserInputHashtag(null);
                 return "hashtagPosts.xhtml";
+            }
+                
             else{
                 FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Oops! No posts found from your friends with hashtag "+this.userInputHashtag));
             }
@@ -78,4 +83,13 @@ public class HashtagAction {
         }
         return "home.xhtml";
     }
+    public String showHashtagPostsByFriends(String userId, String hashtag){
+        this.userInputHashtag = hashtag;
+        return this.showHashtagPostsByFriends(userId);
+    }
+    public void attributeListener(ActionEvent event) {
+      this.userInputHashtag = (String)event.getComponent().getAttributes().get("hashtag");	
+      //String value = FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap().get("hidden1").setHidden1(value);
+      //<input type="hidden" name="hidden1" value="this is hidden2" />
+   }
 }

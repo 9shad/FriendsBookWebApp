@@ -3,8 +3,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
-      xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
     <h:head>
         <title>Home Page</title>
         <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
@@ -55,63 +54,43 @@
                         </div>
                         <ul class="list-group list-group-flush">
                             <!--display few friends and in a link fashion-->
-                            <h:form>
-                                ${friendsBean.generateFriendsList(loginBean.user.userId)}
-                                <h:dataTable value="#{friendsBean.friendList}" var="friend" rows="10" style="width:100%">
-                                    <h:column>
-                                        <li class="list-group-item">
-                                            <h:commandLink value="#{friend}" action="#{friendsBean.generateFriendProfile(friend)}"></h:commandLink>
-                                        </li>
-                                    </h:column>
-                                </h:dataTable>
-                                <li class="list-group-item"><h:commandLink value="View All" action="#{friendsBean.viewAllFriends()}"></h:commandLink></li>
-                            </h:form>
-                            
+                            <li class="list-group-item">Friend 1</li>
+                            <li class="list-group-item">Friend 2</li>
+                            <li class="list-group-item">Friend 3</li>
+                            <li class="list-group-item">View More</li>
                         </ul>
                     </div>
                 </div><!--end of left column-->
-
+                
                 <div class="col-md-6">
                     <!--middle column to display latest posts with comment 
                     and create new comment
                     and create new post-->
-                    <div class="card">
-                        <h6 class="card-header"><i class="far fa-edit"></i> Welcome <strong> #{loginBean.user.name}!!</strong> <!--What's on your mind?--></h6>
-                        <div class="card-body">
-                            <h:form id="postForm">
-                                <div class="form-group mb-2">
-                                    <h:inputTextarea class="form-control mx-sm-1" rows="2" a:maxlength='255' value="#{postBean.postDescription}" a:placeholder='Whats on your mind?' required="true" requiredMessage="Post cannot be empty!"></h:inputTextarea>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <h:commandButton class="form-control btn btn-primary" value="Post" action="#{postBean.createPost(loginBean.user.userId)}"></h:commandButton>
-                                </div>
-                            </h:form>
-                            <div>
-                                <h:messages class="alert alert-warning my-sm-2"></h:messages>
-                            </div>
-                        </div>
-                    </div><!-- end of post card-->
                     
-                    <!-- Featured posts from friends-->
+                    <!-- Hash-tag posts from friends-->
                     <div class="card mt-sm-2">
-                        <h6 class="card-header"><i class="fas fa-user-edit"></i> Featured Posts</h6>
+                        <h6 class="card-header"><i class="fas fa-user-edit"></i> Posts with <strong>#{hashtagBean.userInputHashtag}</strong> from your friends.</h6>
+                        <div>
+                            <h:messages class="alert alert-warning my-sm-2"></h:messages>
+                        </div>
                     </div><!--end of featured post tag-->
                     
                     <!-- iterate on post and create separate cards-->
-                    <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">User name</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <footer class="blockquote-footer mb-sm-2">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                          <footer class="blockquote-footer mb-sm-2">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                          <h:form class="form-inline">
-                            <div class="form-group mb-2">
-                                <h:inputText class="form-control mx-sm-1" maxlength="150" a:placeholder='Comment!'></h:inputText>
-                                <h:commandButton class="form-control btn btn-primary" value="Comment"></h:commandButton>
-                            </div>
-                          </h:form>
-                        </div>
-                    </div> <!--end of friend post card 2-->                                        
+                    <h:dataTable value="#{hashtagBean.posts}" var="post" style="width: 100%">
+                        <h:column>
+                            <div class="card">
+                                <div class="card-body">
+                                    <h5 class="card-title">#{post.userId}</h5>
+                                    <p class="card-text">#{post.description}</p>
+                                    <h:dataTable value="#{post.userComments}" var="comment" style="width: 100%">
+                                        <h:column>
+                                            <footer class="blockquote-footer mb-sm-2">Someone famous in <cite title="Source Title">Source Title</cite></footer>
+                                        </h:column>
+                                    </h:dataTable>
+                                </div>
+                            </div> <!--end of friend post card-->                                        
+                        </h:column>
+                    </h:dataTable> 
                 </div><!--end of middle column-->
                 
                 
@@ -129,7 +108,9 @@
                                     <h:column>
                                         <!--<f:facet name="header">header</f:facet>-->
                                         <li class="list-group-item">
-                                            <h:commandLink value ="#{hashtag}" action="#{hashtagBean.showHashtagPostsByFriends(loginBean.user.userId,hashtag)}" ></h:commandLink>
+                                            <h:commandLink value ="#{hashtag}" actionListener="#{hashtagBean.attributeListener}" action="#{hashtagBean.showHashtagPostsByFriends(loginBean.user.userId)}" >
+                                                <f:attribute name="hashtag" value="#{hashtag}"/>
+                                            </h:commandLink>
                                         </li>
                                     </h:column>
                                 </h:dataTable>
