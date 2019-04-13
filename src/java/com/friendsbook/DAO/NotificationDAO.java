@@ -226,5 +226,98 @@ public class NotificationDAO {
 		
 		return notifications;
 	}
+        public static List<FriendNotification> getUnProsessedFrndNotification(String userId){
+		List<FriendNotification> notifications = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+                final String QUERY;
+                QUERY = "select notification_id, from_userid,to_userid,fr.status "
+                    + "from user_notification un, friend_request fr "
+                    + "where fr.notification_id = un.id and un.user_id = ? and un.status = ? and notification_type=?";
+		
+		try {
+			notifications = new ArrayList<FriendNotification>();
+			ps = Connector.getConnection().prepareStatement(QUERY);
+			ps.setString(1, userId);
+			ps.setString(2, UserNotification.NEW);
+			ps.setString(3, UserNotification.FRIEND_REQUEST);
+
+			rs = ps.executeQuery();
+                        while(rs.next()) {
+                            FriendNotification fn = new FriendNotification();
+                            fn.setId(rs.getInt("notification_id"));
+                            fn.setNotificationType(UserNotification.FRIEND_REQUEST);
+                            fn.setStatus(UserNotification.NEW);
+                            fn.setUserId(userId);
+
+                            UserFriendRequest request = new UserFriendRequest();
+                            request.setNotificationId(rs.getInt("notification_id"));
+                            request.setStatus(rs.getString("fr.status"));
+                            request.setFromUserId(rs.getString("from_userid"));
+                            request.setToUserId(rs.getString("to_userid"));
+
+                            fn.setFriendRequests(request);
+                            notifications.add(fn);
+                        }	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			try {
+				rs.close();
+				ps.close();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}		
+		return notifications;
+	}
+        public static List<MessageNotification> getUnProsessedMsgNotification(String userId){
+
+		List<MessageNotification> notifications = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+                final String QUERY;
+                QUERY = "select notification_id, from_userid,to_userid,description "
+                        + "from user_notification un, user_message um "
+                        + "where um.notification_id = un.id and un.user_id = ? and un.status = ? and notification_type = ?";
+		
+		try {
+			notifications = new ArrayList<MessageNotification>();
+			ps = Connector.getConnection().prepareStatement(QUERY);
+			ps.setString(1, userId);
+			ps.setString(2, UserNotification.NEW);
+			ps.setString(3, UserNotification.NEW_MSG);
+
+			rs = ps.executeQuery();
+                        while(rs.next()) {
+                            MessageNotification mn = new MessageNotification();
+                            mn.setId(rs.getInt("notification_id"));
+                            mn.setNotificationType(UserNotification.NEW_MSG);
+                            mn.setStatus(UserNotification.NEW);
+                            mn.setUserId(userId);
+
+                            UserMessage message = new UserMessage();
+                            message.setNotificationId(rs.getInt("notification_id"));
+                            message.setMsgDescription(rs.getString("description"));
+                            message.setFromUser(rs.getString("from_userid"));
+                            message.setToUser(rs.getString("to_userid"));
+
+                            mn.setUserMessage(message);
+
+                            notifications.add(mn);
+                        }   	
+                    } catch (SQLException e) {
+                            e.printStackTrace();
+                    }finally {
+                            try {
+                                    rs.close();
+                                    ps.close();
+                            } catch (SQLException e) {
+                                    e.printStackTrace();
+                            }
+                    }
+
+                    return notifications;
+	}
 	
 }

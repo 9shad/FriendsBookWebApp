@@ -27,8 +27,8 @@
                         <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="home.xhtml"><i class="fas fa-home"></i> Home</h:outputLink>
                         <h:commandLink class ="nav-item nav-link ml-sm-2 active" action="#{updateProfileBean.loadProfile(loginBean.user)}"><i class="far fa-user"></i> Profile</h:commandLink>
                         <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="home.xhtml"><i class="far fa-envelope"></i> Message</h:outputLink>
-                        <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="home.xhtml"><i class="far fa-bell"></i> Notification</h:outputLink>
-                        <h:outputLink class="nav-item nav-link ml-sm-2 active" value="index.xhtml" ><i class="fas fa-sign-out-alt"></i> Log Out</h:outputLink>
+                        <h:commandLink class ="nav-item nav-link ml-sm-2 active" action="notification.xhtml"><i class="far fa-bell"></i> Notification [#{notificationBean.getCount(loginBean.user.userId)}]</h:commandLink>
+                        <h:commandLink class="nav-item nav-link ml-sm-2 active" action="#{logoutBean.logout()}" ><i class="fas fa-sign-out-alt"></i> Log Out</h:commandLink>
                     </div>
                 </h:form>
             </div>
@@ -45,13 +45,31 @@
                             <h:messages class="alert alert-warning my-sm-2"></h:messages>
                         </div>
                     </div><!--end of Friend List header-->
-                    <div class="card mt-sm-2">
+                    <div class="card">
                         <h:form>
                                 <!--<h:panelGrid columns="3" style="width:100%">
                                 <h:column>-->
                                 <h:dataTable value="#{friendsBean.friends}" var="friends" style="width:100%">
                                     <h:column>
-                                        <h:dataTable value="#{friends}" var="friend" style="width:100%">
+                                        <h:dataTable value="#{friends[0]}" var="friend" style="width:100%">
+                                            <h:column>
+                                                <li class="list-group-item mx-sm-1 my-sm-1">
+                                                    <h:commandLink value="#{friend}" action="#{friendsBean.generateFriendProfile(friend)}"></h:commandLink>
+                                                </li>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:column>
+                                    <h:column>
+                                        <h:dataTable value="#{friends[1]}" var="friend" style="width:100%">
+                                            <h:column>
+                                                <li class="list-group-item mx-sm-1 my-sm-1">
+                                                    <h:commandLink value="#{friend}" action="#{friendsBean.generateFriendProfile(friend)}"></h:commandLink>
+                                                </li>
+                                            </h:column>
+                                        </h:dataTable>
+                                    </h:column>
+                                    <h:column>
+                                        <h:dataTable value="#{friends[2]}" var="friend" style="width:100%">
                                             <h:column>
                                                 <li class="list-group-item mx-sm-1 my-sm-1">
                                                     <h:commandLink value="#{friend}" action="#{friendsBean.generateFriendProfile(friend)}"></h:commandLink>

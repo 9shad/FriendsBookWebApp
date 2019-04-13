@@ -25,16 +25,16 @@
                 </h:form>
                 <h:form class="form-inline ml-auto">
                     <div class="navbar-nav">
-                        <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="home.xhtml"><i class="fas fa-home"></i> Home</h:outputLink>
+                        <h:outputLink class ="nav-item nav-link ml-sm-2 " value="home.xhtml"><i class="fas fa-home"></i> Home</h:outputLink>
                         <h:commandLink class ="nav-item nav-link ml-sm-2 " action="#{updateProfileBean.loadProfile(loginBean.user)}"><i class="far fa-user"></i> Profile</h:commandLink>
                         <h:outputLink class ="nav-item nav-link ml-sm-2 " value="home.xhtml"><i class="far fa-envelope"></i> Message</h:outputLink>
-                        <h:commandLink class ="nav-item nav-link ml-sm-2 " action="notification.xhtml"><i class="far fa-bell"></i> Notification [#{notificationBean.getCount(loginBean.user.userId)}]</h:commandLink>
+                        <h:commandLink class ="nav-item nav-link ml-sm-2 active" action="notification.xhtml"><i class="far fa-bell"></i> Notification [#{notificationBean.getCount(loginBean.user.userId)}]</h:commandLink>
                         <h:commandLink class="nav-item nav-link ml-sm-2 " action="#{logoutBean.logout()}" ><i class="fas fa-sign-out-alt"></i> Log Out</h:commandLink>
                     </div>
                 </h:form>
             </div>
         </nav>
-
+        
         <div class="container-fluid">
             <br/>
             <div class="row">
@@ -72,46 +72,54 @@
                 </div><!--end of left column-->
 
                 <div class="col-md-6">
-                    <!--middle column to display latest posts with comment 
-                    and create new comment
-                    and create new post-->
+                    <!--middle column to display notifications-->
                     <div class="card">
-                        <h6 class="card-header"><i class="far fa-edit"></i> Welcome <strong> #{loginBean.user.name}!!</strong></h6>
+                        <h6 class="card-header"><i class="fas fa-edit"></i> Notification</h6>
+                        <!--iterate over notification and messages to display-->
                         <div class="card-body">
-                            <h:form id="postForm">
-                                <div class="form-group mb-2">
-                                    <h:inputTextarea class="form-control mx-sm-1" rows="2" a:maxlength='255' value="#{postBean.postDescription}" a:placeholder='Whats on your mind?' required="true" requiredMessage="Post cannot be empty!"></h:inputTextarea>
-                                </div>
-                                <div class="form-group mb-2">
-                                    <h:commandButton class="form-control btn btn-primary" value="Post" action="#{postBean.createPost(loginBean.user.userId)}"></h:commandButton>
-                                </div>
-                            </h:form>
                             <div>
-                                <h:messages class="alert alert-warning my-sm-2 mx-sm-2"></h:messages>
+                                <h:messages class="alert alert-warning"></h:messages>
                             </div>
+                            <h:form>
+                                <ul class="list-group list-group-flush">
+                                    <h:dataTable value="#{notificationBean.friendNotifications}" var="friendRequest" style="width:100%">
+                                        <h:column>
+                                            <li class="list-group-item">
+                                                <div class="form-inline">
+                                                    <span><strong>#{friendRequest.friendRequests.fromUserId} </strong> sent you a friend request</span>
+                                                    <div class="ml-auto">
+                                                        <h:commandButton value="Accept" class="btn btn-outline-success mx-sm-1" action="#{notificationBean.processRequest(friendRequest,'accepted',friendsBean.friendList)}"></h:commandButton>
+                                                        <h:commandButton value="Reject" class="btn btn-outline-danger mx-sm-1" action="#{notificationBean.processRequest(friendRequest,'rejected',friendsBean.friendList)}"></h:commandButton>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                            </li>
+                                        </h:column>
+                                    </h:dataTable>
+                                    <h:dataTable value="#{notificationBean.messageNotifications}" var="message" style="width:100%">
+                                        <h:column>
+                                            <li class="list-group-item">
+                                                <div class="form-inline">
+                                                    <span>
+                                                        <strong>#{message.userMessage.fromUser} </strong> sent you a message <br/>
+                                                        <footer class="blockquote-footer mb-sm-2">#{message.userMessage.msgDescription}</footer>
+                                                    </span><br/>
+                                                    <div class="ml-auto">
+                                                        <h:commandButton value="Reply" class="btn btn-outline-success mx-sm-1"></h:commandButton>
+                                                        <h:commandButton value="Hide" class="btn btn-outline-danger mx-sm-1"></h:commandButton>
+                                                    </div>
+                                                    
+                                                </div>
+                                                
+                                            </li>
+                                        </h:column>
+                                    </h:dataTable>
+                                    
+                                </ul>
+                            </h:form>
                         </div>
-                    </div><!-- end of post card-->
-                    
-                    <!-- Featured posts from friends-->
-                    <div class="card mt-sm-2">
-                        <h6 class="card-header"><i class="fas fa-user-edit"></i> Featured Posts</h6>
-                    </div><!--end of featured post tag-->
-                    
-                    <!-- iterate on post and create separate cards-->
-                    <div class="card">
-                        <div class="card-body">
-                          <h5 class="card-title">User name</h5>
-                          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                          <footer class="blockquote-footer mb-sm-2">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                          <footer class="blockquote-footer mb-sm-2">Someone famous in <cite title="Source Title">Source Title</cite></footer>
-                          <h:form class="form-inline">
-                            <div class="form-group mb-2">
-                                <h:inputText class="form-control mx-sm-1" maxlength="150" a:placeholder='Comment!'></h:inputText>
-                                <h:commandButton class="form-control btn btn-primary" value="Comment"></h:commandButton>
-                            </div>
-                          </h:form>
-                        </div>
-                    </div> <!--end of friend post card 2-->                                        
+                    </div><!--end of notification-->                                       
                 </div><!--end of middle column-->
                 
                 

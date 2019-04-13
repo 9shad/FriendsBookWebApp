@@ -115,6 +115,12 @@ public class FriendsAction implements Serializable {
         return "friendList.xhtml";
     }
     
+    /**
+     * Known bug: handling duplicate friend request
+     * possible fix: if i update friend request based upon fromuserID and touserID then 
+     * all duplicate friend request gets updated
+     * @param fromUserId 
+     */
     public void sendFriendRequest(String fromUserId){
         UserFriendRequest obj = new UserFriendRequest();
         obj.setFromUserId(fromUserId);
