@@ -84,14 +84,26 @@
                         <h:column>
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">#{post.userId}</h5>
-                                    <p class="card-text">#{post.description}</p>
+                                    <h5 class="card-title text-primary">#{post.userId}</h5>
+                                    <p class="card-text text-secondary">
+                                        <h:outputText value="#{post.description}" escape="false"></h:outputText>
+                                    </p>
+                                    
                                     <h:dataTable value="#{post.userComments}" var="comment" style="width: 100%">
                                         <h:column>
-                                            <footer class="blockquote-footer mb-sm-2"><strong>#{comment.userId} says </strong><cite title="Source Title">#{comment.description}</cite></footer>
+                                            <footer class="blockquote-footer mb-sm-2">
+                                                <span class="text-info">
+                                                    #{comment.userId}
+                                                </span> 
+                                                commented: 
+                                                <cite title="Source Title">
+                                                    <h:outputText value="#{comment.description}" escape="false"></h:outputText>
+                                                </cite>
+                                            </footer>
                                         </h:column>
                                     </h:dataTable>
-                                </div>
+                                    <p class="card-text"><small class="text-muted" style="margin-left:65%">Posted on #{post.timeStamp}</small></p>
+                                </div><!--end of card body-->
                             </div> <!--end of friend post card-->                                        
                         </h:column>
                     </h:dataTable> 

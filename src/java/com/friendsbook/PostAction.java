@@ -28,6 +28,7 @@ public class PostAction {
     }
     
     private String postDescription;
+    private String comment;
 
     public String getPostDescription() {
         return postDescription;
@@ -35,6 +36,14 @@ public class PostAction {
 
     public void setPostDescription(String postDescription) {
         this.postDescription = postDescription;
+    }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment;
     }
     
     public String createPost(String userId){
@@ -52,6 +61,10 @@ public class PostAction {
         }
         
         return "home.xhtml";
+    }
+    
+    public void createComment(String userId, UserPost post){
+        
     }
     
     

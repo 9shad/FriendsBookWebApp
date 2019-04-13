@@ -88,7 +88,7 @@
                                                 <div class="form-inline">
                                                     <span><strong>#{friendRequest.friendRequests.fromUserId} </strong> sent you a friend request</span>
                                                     <div class="ml-auto">
-                                                        <h:commandButton value="Accept" class="btn btn-outline-success mx-sm-1" action="#{notificationBean.processRequest(friendRequest,'accepted',friendsBean.friendList)}"></h:commandButton>
+                                                        <h:commandButton value="Accept" class="btn btn-outline-info mx-sm-1" action="#{notificationBean.processRequest(friendRequest,'accepted',friendsBean.friendList)}"></h:commandButton>
                                                         <h:commandButton value="Reject" class="btn btn-outline-danger mx-sm-1" action="#{notificationBean.processRequest(friendRequest,'rejected',friendsBean.friendList)}"></h:commandButton>
                                                     </div>
                                                     
@@ -106,8 +106,8 @@
                                                         <footer class="blockquote-footer mb-sm-2">#{message.userMessage.msgDescription}</footer>
                                                     </span><br/>
                                                     <div class="ml-auto">
-                                                        <h:commandButton value="Reply" class="btn btn-outline-success mx-sm-1"></h:commandButton>
-                                                        <h:commandButton value="Hide" class="btn btn-outline-danger mx-sm-1"></h:commandButton>
+                                                        <h:commandButton value="Reply" class="btn btn-outline-info mx-sm-1"></h:commandButton>
+                                                        <h:commandButton value="Hide" class="btn btn-outline-danger mx-sm-1" action="#{notificationBean.processRequest(message,'hide')}"></h:commandButton>
                                                     </div>
                                                     
                                                 </div>

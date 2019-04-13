@@ -95,4 +95,16 @@ public class NotificationAction implements Serializable {
             }
             return false;
     }
+    
+    public String processRequest(MessageNotification notification, String status){
+        if(status.equals("hide")){
+            if(NotificationDAO.processNotification(notification.getId())){
+                this.messageNotifications.remove(notification);
+                FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Message notification processed successfully!"));
+            }else{
+                FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Oops! something went wrong, please try again!"));
+            }
+        }        
+        return "";
+    }
 }
