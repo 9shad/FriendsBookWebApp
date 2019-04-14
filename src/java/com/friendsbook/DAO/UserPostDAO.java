@@ -189,6 +189,7 @@ public class UserPostDAO {
 				post.setType(UserPost.POST);
 				post.setUserId(rs.getString("user_id"));
 				post.setDescription(rs.getString("description"));
+                                post.setTimeStamp(rs.getTimestamp("timestamp").toLocalDateTime());
 				
 				List<UserComment> comments = UserCommentDAO.getCommentsDAO(rs.getInt("id"));
 				if(comments != null && !comments.isEmpty()) {

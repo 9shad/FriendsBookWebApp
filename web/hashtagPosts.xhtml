@@ -14,10 +14,13 @@
             .card-body{
                 padding: 1rem !important;
             }
+            .sticky-offset{
+                top:80px;
+            }
         </style>
     </h:head>
     <h:body style="background-color: #e9ebee">
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3f5c9a;">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #3f5c9a;">
             <div class="container">
                 <h:form>
                     <h:commandLink class="navbar-brand" action="index"><i class="fas fa-users"></i> Friends Book</h:commandLink>
@@ -39,7 +42,7 @@
             <div class="row">                
                 <div class="col-md-3">
                     <!-- left column to display friends -->
-                    <div class="card sticky-top">
+                    <div class="card sticky-top sticky-offset">
                         <h5 class="card-header"><i class="fas fa-user-friends"></i> Friend List</h5>
                         <div class="card-body">
                             <h:form>
@@ -102,7 +105,7 @@
                                             </footer>
                                         </h:column>
                                     </h:dataTable>
-                                    <p class="card-text"><small class="text-muted" style="margin-left:65%">Posted on #{post.timeStamp}</small></p>
+                                    <p class="card-text form-inline"><small class="text-muted ml-auto">Posted on #{post.timeStamp}</small></p>
                                 </div><!--end of card body-->
                             </div> <!--end of friend post card-->                                        
                         </h:column>
@@ -114,7 +117,7 @@
                 <div class="col-md-3">
                     <!--right column to display top three hash tags 
                     and input text box to search a particular hash tag-->
-                    <div class="card sticky-top">
+                    <div class="card sticky-top sticky-offset">
                         <h5 class="card-header"><i class="fab fa-slack-hash"></i> Featured Hash Tag</h5>
                         <ul class="list-group list-group-flush">
                             <!--display top 5 tags-->

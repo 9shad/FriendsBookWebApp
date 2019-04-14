@@ -5,7 +5,9 @@
  */
 package com.friendsbook;
 
+import com.friendsbook.DAO.UserCommentDAO;
 import com.friendsbook.DAO.UserPostDAO;
+import com.friendsbook.pojo.UserComment;
 import com.friendsbook.pojo.UserPost;
 import java.time.LocalDateTime;
 import javax.inject.Named;
@@ -64,7 +66,16 @@ public class PostAction {
     }
     
     public void createComment(String userId, UserPost post){
-        
+        UserComment userComment = new UserComment();
+        userComment.setUserId(userId);
+        userComment.setDescription(comment);
+        userComment.setPostId(post.getPostId());
+        if(UserCommentDAO.saveCommentDAO(userComment)) {
+            post.getUserComments().add(userComment);
+        }else{
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage("Oops! something went wrong, please try again!"));
+        }
+        this.setComment(null);
     }
     
     

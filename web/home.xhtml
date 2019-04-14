@@ -15,10 +15,13 @@
             .card-body{
                 padding: 1rem !important;
             }
+            .sticky-offset{
+                top:80px;
+            }
         </style>
     </h:head>
     <h:body style="background-color: #e9ebee">
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3f5c9a;">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #3f5c9a;">
             <div class="container">
                 <h:form>
                     <h:commandLink class="navbar-brand" action="index"><i class="fas fa-users"></i> Friends Book</h:commandLink>
@@ -41,7 +44,7 @@
                 
                 <div class="col-md-3">
                     <!-- left column to display friends -->
-                    <div class="card sticky-top">
+                    <div class="card sticky-top sticky-offset">
                         <h5 class="card-header"><i class="fas fa-user-friends"></i> Friend List</h5>
                         <div class="card-body">
                             <h:form>
@@ -97,14 +100,13 @@
                         <h6 class="card-header"><i class="fas fa-user-edit"></i> Featured Posts</h6>
                     </div><!--end of featured post tag-->
                     
-                    <h:form>
                         <!-- iterate on post and create separate cards-->
                         <h:dataTable value="#{loginBean.postsFromFriends}" var ="post" style="width:100%">
                             <h:column>
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title text-primary">#{post.userId}</h5>
-                                        <p class="card-text text-secondary">
+                                        <p class="card-text text-secondary" style="width:90%">
                                             <h:outputText value="#{post.description}" escape="false"></h:outputText>
                                         </p>
                                         <h:dataTable value="#{post.userComments}" var="comment">
@@ -119,27 +121,24 @@
                                                     </cite>
                                                 </footer>
                                             </h:column>
-                                        </h:dataTable><!--end of comments section-->                                        
-                                        <div class="form-inline">
-                                            <div class="form-group mb-2">
-                                                <h:inputText class="form-control mx-sm-1" maxlength="150" a:placeholder='Comment!' required="true" requiredMessage="Comment field is empty!"></h:inputText>
+                                        </h:dataTable><!--end of user comments-->
+                                        <h:form>
+                                            <div class="form-inline">
+                                                <h:inputText style="width:80%" value="#{postBean.comment}" class="form-control mx-sm-1" maxlength="150" a:placeholder='Comment!' required="true" requiredMessage="Comment field is empty!"></h:inputText>
                                                 <h:commandButton class="form-control btn btn-primary" value="Comment" action="#{postBean.createComment(loginBean.user.userId, post)}"></h:commandButton>
                                             </div>
-                                        </div><!--end of comment form fields-->
-                                        <p class="card-text ml-auto"><small class="text-muted" style="margin-left:65%">Posted on #{post.timeStamp}</small></p>
+                                        </h:form>
+                                        <p class="card-text form-inline"><small class="text-muted ml-auto">Posted on #{post.timeStamp}</small></p>
                                     </div><!--end of card body-->
                                 </div> <!--end of card-->
                             </h:column>
-                        </h:dataTable>
-                    </h:form><!--end of friend post-->                     
+                        </h:dataTable><!--end of friend post-->   
                 </div><!--end of middle column-->
-                
-                
                 
                 <div class="col-md-3">
                     <!--right column to display top three hash tags 
                     and input text box to search a particular hash tag-->
-                    <div class="card sticky-top">
+                    <div class="card sticky-top sticky-offset">
                         <h5 class="card-header"><i class="fab fa-slack-hash"></i> Featured Hash Tag</h5>
                         <ul class="list-group list-group-flush">
                             <!--display top 5 tags-->

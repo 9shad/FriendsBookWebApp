@@ -15,10 +15,13 @@
             .card-body{
                 padding: 1rem !important;
             }
+            .sticky-offset{
+                top:80px;
+            }
         </style>
     </h:head>
     <h:body style="background-color: #e9ebee">
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3f5c9a;">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #3f5c9a;">
             <div class="container">
                 <h:form>
                     <h:commandLink class="navbar-brand" action="index"><i class="fas fa-users"></i> Friends Book</h:commandLink>
@@ -41,7 +44,7 @@
                 
                 <div class="col-md-3">
                     <!-- left column to display friends -->
-                    <div class="card sticky-top">
+                    <div class="card sticky-top sticky-offset">
                         <h5 class="card-header"><i class="fas fa-user-friends"></i> Friend List</h5>
                         <div class="card-body">
                             <h:form>
@@ -107,7 +110,7 @@
                                                     </span><br/>
                                                     <div class="ml-auto">
                                                         <h:commandButton value="Reply" class="btn btn-outline-info mx-sm-1"></h:commandButton>
-                                                        <h:commandButton value="Hide" class="btn btn-outline-danger mx-sm-1" action="#{notificationBean.processRequest(message,'hide')}"></h:commandButton>
+                                                        <h:commandButton value="Mark as read" class="btn btn-outline-dark mx-sm-1" action="#{notificationBean.processRequest(message,'hide')}"></h:commandButton>
                                                     </div>
                                                     
                                                 </div>
@@ -127,7 +130,7 @@
                 <div class="col-md-3">
                     <!--right column to display top three hash tags 
                     and input text box to search a particular hash tag-->
-                    <div class="card sticky-top">
+                    <div class="card sticky-top sticky-offset">
                         <h5 class="card-header"><i class="fab fa-slack-hash"></i> Featured Hash Tag</h5>
                         <ul class="list-group list-group-flush">
                             <!--display top 5 tags-->

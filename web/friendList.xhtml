@@ -14,10 +14,13 @@
             .card-body{
                 padding: 1rem !important;
             }
+            .sticky-offset{
+                top:80px;
+            }
         </style>
     </h:head>
     <h:body style="background-color: #e9ebee">
-        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #3f5c9a;">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #3f5c9a;">
             <div class="container">
                 <h:form>
                     <h:commandLink class="navbar-brand" action="index"><i class="fas fa-users"></i> Friends Book</h:commandLink>
@@ -87,7 +90,7 @@
                 
                 <div class="col-md-5">
                     <!-- right column to display friends profile-->
-                    <div class="card sticky-top">
+                    <div class="card sticky-top sticky-offset">
                         <h5 class="card-header"><i class="fas fa-user-edit"></i> Profile Information</h5>
                         <ul class="list-group list-group-flush">
                             <h:dataTable value="#{friendsBean.friendProfile}" var="profile" style="width:100%" rows="1">
