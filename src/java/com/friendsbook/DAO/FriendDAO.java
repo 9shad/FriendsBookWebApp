@@ -81,11 +81,13 @@ public class FriendDAO {
 			rs = ps.executeQuery();
 			
 			while(rs.next()){
-				if(rs.getString("from_userid").equals(userId)){
-					friendList.add(rs.getString("to_userid"));
-				}else{
-					friendList.add(rs.getString("from_userid"));
-				}
+                            if(rs.getString("from_userid").equals(userId)){
+                                if(!rs.getString("to_userid").equals(""))
+                                    friendList.add(rs.getString("to_userid"));
+                            }else if(rs.getString("to_userid").equals(userId)){
+                                if(!rs.getString("from_userid").equals(""))
+                                    friendList.add(rs.getString("from_userid"));
+                            }
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

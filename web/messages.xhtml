@@ -1,0 +1,122 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Home Page</title>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous"></link>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js" integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous"></script>
+        <style>
+            .card-body{
+                padding: 1rem !important;
+            }
+            .sticky-offset{
+                top:80px;
+            }
+            @media (max-width:800px){
+                .anyClass {
+                    max-height:280px;
+                }
+                .maxHeight {
+                    max-height:220px;
+                }
+                .scroll{
+                    overflow-y: scroll;
+                }
+            }
+            @media (min-width:800px){
+                .anyClass {
+                    max-height:280px;
+                }
+                .maxHeight {
+                    max-height:220px;
+                }
+                .scroll{
+                    overflow-y: scroll;
+                }
+            }
+            @media (min-width:1024px){
+                .anyClass {
+                    max-height:500px;
+                }
+                .maxHeight {
+                    max-height:370px;
+                }
+                .scroll{
+                    overflow-y: scroll;
+                }
+            }
+            
+        </style>
+    </h:head>
+    <h:body style="background-color: #e9ebee">
+        <nav class="navbar navbar-expand-lg navbar-dark sticky-top" style="background-color: #3f5c9a;">
+            <div class="container">
+                <h:form>
+                    <h:commandLink class="navbar-brand" action="index"><i class="fas fa-users"></i> Friends Book</h:commandLink>
+                </h:form>
+                <h:form class="form-inline ml-auto">
+                    <div class="navbar-nav">
+                        <h:outputLink class ="nav-item nav-link ml-sm-2" value="home.xhtml"><i class="fas fa-home"></i> Home</h:outputLink>
+                        <h:commandLink class ="nav-item nav-link ml-sm-2" action="#{updateProfileBean.loadProfile(loginBean.user)}"><i class="far fa-user"></i> Profile</h:commandLink>
+                        <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="messages.xhtml"><i class="far fa-envelope"></i> Message</h:outputLink>
+                        <h:commandLink class ="nav-item nav-link ml-sm-2" action="notification.xhtml"><i class="far fa-bell"></i> Notification [#{notificationBean.getCount(loginBean.user.userId)}]</h:commandLink>
+                        <h:commandLink class="nav-item nav-link ml-sm-2" action="#{logoutBean.logout()}" ><i class="fas fa-sign-out-alt"></i> Log Out</h:commandLink>
+                    </div>
+                </h:form>
+            </div>
+        </nav>
+        
+        <div class="container-fluid">
+            <br/>
+            <div class="row">                
+                <div class="col-sm-4">
+                    <!--left column to display all friends-->
+                    <div class="card">
+                        <h6 class="card-header"><i class="fas fa-user-friends"></i><strong> #{loginBean.user.userId}</strong> Friend List</h6>
+                        <div class="card-body anyClass scroll">
+                            <h:form>
+                                <h:dataTable value="#{friendsBean.friendList}" var="friend" style="width:100%">
+                                    <h:column>
+                                        <li class="list-group-item">
+                                            <h:commandLink value="#{friend}" action="#{messageBean.loadHistoryMessage(loginBean.user.userId, friend)}"></h:commandLink>
+                                        </li>
+                                    </h:column>
+                                </h:dataTable>
+                            </h:form>
+                        </div>
+                    </div><!--end of Friend List-->
+                </div><!--end of left column-->
+                
+                <div class="col-sm-8">
+                    <!-- right column to display message history-->
+                    <div class="card">
+                        <h5 class="card-header"><i class="fas fa-user-edit"></i> Messages</h5>
+                        <div>
+                            <h:messages class="alert alert-warning my-sm-2"></h:messages>
+                        </div>
+                        <div class="card-body maxHeight scroll">
+                            <h:outputText value="#{messageBean.htmlOutput}" escape="false"></h:outputText>
+                        </div>
+                        <div class="card-body">
+                            <h:form>
+                                <div class="form-group mb-2">
+                                    <h:inputTextarea class="form-control mx-sm-1" rows="2" a:maxlength='450' value="#{messageBean.message}" a:placeholder='Type your reply here....' required="true" requiredMessage="Message cannot be empty!"></h:inputTextarea>
+                                </div>
+                                <div class="form-group ml-auto">
+                                    <h:commandButton value="Send" action="#{messageBean.sendMessage(loginBean.user.userId)}" class="form-control btn btn-outline-info mx-sm-1"></h:commandButton>
+                                </div>
+                            </h:form>
+                        </div>
+                    </div>
+                </div><!--end of right column-->
+                
+            </div><!--end of row-->
+        </div> <!--End of container-->
+    </h:body>
+</html>
+

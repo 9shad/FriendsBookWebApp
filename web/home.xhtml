@@ -30,7 +30,7 @@
                     <div class="navbar-nav">
                         <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="home.xhtml"><i class="fas fa-home"></i> Home</h:outputLink>
                         <h:commandLink class ="nav-item nav-link ml-sm-2 " action="#{updateProfileBean.loadProfile(loginBean.user)}"><i class="far fa-user"></i> Profile</h:commandLink>
-                        <h:outputLink class ="nav-item nav-link ml-sm-2 " value="home.xhtml"><i class="far fa-envelope"></i> Message</h:outputLink>
+                        <h:outputLink class ="nav-item nav-link ml-sm-2 " value="messages.xhtml"><i class="far fa-envelope"></i> Message</h:outputLink>
                         <h:commandLink class ="nav-item nav-link ml-sm-2 " action="notification.xhtml"><i class="far fa-bell"></i> Notification [#{notificationBean.getCount(loginBean.user.userId)}]</h:commandLink>
                         <h:commandLink class="nav-item nav-link ml-sm-2 " action="#{logoutBean.logout()}" ><i class="fas fa-sign-out-alt"></i> Log Out</h:commandLink>
                     </div>
@@ -42,7 +42,7 @@
             <br/>
             <div class="row">
                 
-                <div class="col-md-3">
+                <div class="col-sm-3 col-md-3">
                     <!-- left column to display friends -->
                     <div class="card sticky-top sticky-offset">
                         <h5 class="card-header"><i class="fas fa-user-friends"></i> Friend List</h5>
@@ -74,7 +74,7 @@
                     </div>
                 </div><!--end of left column-->
 
-                <div class="col-md-6">
+                <div class="col-sm-6 col-md-6">
                     <!--middle column to display latest posts with comment 
                     and create new comment
                     and create new post-->
@@ -135,7 +135,7 @@
                         </h:dataTable><!--end of friend post-->   
                 </div><!--end of middle column-->
                 
-                <div class="col-md-3">
+                <div class="col-md-3 col-sm-6">
                     <!--right column to display top three hash tags 
                     and input text box to search a particular hash tag-->
                     <div class="card sticky-top sticky-offset">

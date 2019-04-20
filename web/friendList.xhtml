@@ -29,7 +29,7 @@
                     <div class="navbar-nav">
                         <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="home.xhtml"><i class="fas fa-home"></i> Home</h:outputLink>
                         <h:commandLink class ="nav-item nav-link ml-sm-2 active" action="#{updateProfileBean.loadProfile(loginBean.user)}"><i class="far fa-user"></i> Profile</h:commandLink>
-                        <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="home.xhtml"><i class="far fa-envelope"></i> Message</h:outputLink>
+                        <h:outputLink class ="nav-item nav-link ml-sm-2 active" value="messages.xhtml"><i class="far fa-envelope"></i> Message</h:outputLink>
                         <h:commandLink class ="nav-item nav-link ml-sm-2 active" action="notification.xhtml"><i class="far fa-bell"></i> Notification [#{notificationBean.getCount(loginBean.user.userId)}]</h:commandLink>
                         <h:commandLink class="nav-item nav-link ml-sm-2 active" action="#{logoutBean.logout()}" ><i class="fas fa-sign-out-alt"></i> Log Out</h:commandLink>
                     </div>
