@@ -109,7 +109,7 @@
                                                         <footer class="blockquote-footer mb-sm-2">#{message.userMessage.msgDescription}</footer>
                                                     </span><br/>
                                                     <div class="ml-auto">
-                                                        <h:commandButton value="Reply" action="#{messageBean.loadMessage(loginBean.user.userId, message.userMessage.fromUser)}" class="btn btn-outline-info mx-sm-1"></h:commandButton>
+                                                        <h:commandButton value="Reply" action="#{messageBean.loadMessage(loginBean.user.userId, message.userMessage.fromUser, message, notificationBean.messageNotifications)}" class="btn btn-outline-info mx-sm-1"></h:commandButton>
                                                         <h:commandButton value="Mark as read" class="btn btn-outline-dark mx-sm-1" action="#{notificationBean.processRequest(message,'hide')}"></h:commandButton>
                                                     </div>
                                                     
