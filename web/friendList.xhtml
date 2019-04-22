@@ -96,6 +96,9 @@
                             <h:dataTable value="#{friendsBean.friendProfile}" var="profile" style="width:100%" rows="1">
                                 <h:column>
                                     <li class="list-group-item">
+                                        <strong>User ID: </strong> #{profile.userId}
+                                    </li>
+                                    <li class="list-group-item">
                                         <strong>Name: </strong> #{profile.name}
                                     </li>
                                     <li class="list-group-item">

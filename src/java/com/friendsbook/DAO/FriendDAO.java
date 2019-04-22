@@ -82,10 +82,10 @@ public class FriendDAO {
 			
 			while(rs.next()){
                             if(rs.getString("from_userid").equals(userId)){
-                                if(!rs.getString("to_userid").equals(""))
+                                if(!rs.getString("to_userid").equals("") && !friendList.contains(rs.getString("to_userid")))
                                     friendList.add(rs.getString("to_userid"));
                             }else if(rs.getString("to_userid").equals(userId)){
-                                if(!rs.getString("from_userid").equals(""))
+                                if(!rs.getString("from_userid").equals("") && !friendList.contains(rs.getString("from_userid")))
                                     friendList.add(rs.getString("from_userid"));
                             }
 			}
