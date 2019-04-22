@@ -81,7 +81,7 @@
                         <div class="form-row">
                             <div class="form-group col-md-6">
                                 <!--<h:outputLabel for="month">Month </h:outputLabel>-->
-                                <h:selectOneMenu class="form-control" id="month" required="true" value="#{registerBean.month}" requiredMessage="Month cannot be empty">
+                                <h:selectOneMenu class="form-control" id="month" required="true" value="#{registerBean.month}" requiredMessage="Month cannot be empty" validatorMessage="Month field cannot be empty!">
                                     <f:selectItem itemValue="0" itemLabel="Select Month"></f:selectItem>
                                     <f:selectItem itemValue="1" itemLabel="January"></f:selectItem>
                                     <f:selectItem itemValue="2" itemLabel="February"></f:selectItem>
@@ -95,6 +95,7 @@
                                     <f:selectItem itemValue="10" itemLabel="October"></f:selectItem>
                                     <f:selectItem itemValue="11" itemLabel="November"></f:selectItem>
                                     <f:selectItem itemValue="12" itemLabel="December"></f:selectItem>
+                                    <f:validateDoubleRange minimum="1" maximum="12"></f:validateDoubleRange>
                                 </h:selectOneMenu>
                             </div>
                             <div class="form-group col-md-2">
