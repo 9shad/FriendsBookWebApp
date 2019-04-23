@@ -33,7 +33,7 @@ public class MessageAction implements Serializable {
     private String message;
     List<UserMessage> historyMessages;
     private String toUserId;
-    private String htmlOutput = "<div class=\"p-2 mb-1 bg-secondary text-white\" style=\"width:100%;border-radius: 25px\">Click on a user to start conversation!</div>";
+    private String htmlOutput = "<div class=\"p-2 mb-1 bg-secondary text-white\" style=\"width:100%;border-radius: 25px\">Select a user to start conversation!</div>";
     
     public String getMessage() {
         return message;
@@ -116,7 +116,7 @@ public class MessageAction implements Serializable {
             if(sb.length() > 0)
                 htmlOutput = sb.toString();
             else
-                htmlOutput = "<div class=\"p-1 mb-1 bg-secondary text-white\" style=\"width:100%;border-radius: 25px\"> No Messages to display</div>";
+                htmlOutput = "<div class=\"p-1 mb-1 bg-secondary text-white\" style=\"width:100%;border-radius: 25px\"> Send a message to start a new conversation!</div>";
         }
     }
     

@@ -14,7 +14,6 @@ import com.friendsbook.datasource.Connector;
 
 public class FriendDAO {
 	public static boolean sendFriendRequestDAO(UserFriendRequest userRequest){
-		//TODO: before inserting check if same friend request already exists
 		Connection con = null;
 		PreparedStatement ps = null;
 		final String QUERY = "insert into friend_request(notification_id, from_userid,to_userid,status,timestamp) values(?,?,?,?,?)";
@@ -128,6 +127,35 @@ public class FriendDAO {
 			}
 		}
 		return profileInfo;
+	}
+        public static boolean checkExistingFriendRequestDAO(String from_userID, String to_UserID){
+		Connection con = null;
+		PreparedStatement ps = null;
+                ResultSet rs = null;
+		final String QUERY = "select * from friend_request where ((from_userid=? and to_userid=?) or (from_userid=? and to_userid=?)) and status=?";
+		
+		try {
+			con = Connector.getConnection();
+			con.setAutoCommit(false);
+			ps = con.prepareStatement(QUERY);
+			ps.setString(1,from_userID);
+                        ps.setString(2,to_UserID);
+                        ps.setString(3,to_UserID);
+                        ps.setString(4,from_userID);
+			ps.setString(5, UserFriendRequest.NEW);
+			rs = ps.executeQuery();
+			return rs.next();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			try {
+                            rs.close();
+                            ps.close();
+			} catch (SQLException e) {
+                            e.printStackTrace();
+			}
+		}
+		return false;
 	}
 	
 }

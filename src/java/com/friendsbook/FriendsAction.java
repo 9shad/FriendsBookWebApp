@@ -132,14 +132,17 @@ public class FriendsAction implements Serializable {
                 return;
             }//else if list is null then we need to hit database to check both users are already friends
             
-            //this function sends friend request even for already friends
-            //and also sends duplicate friend request if it is not accepted
-            //need to write another DB call to counter this behaviour
-            if(FriendDAO.sendFriendRequestDAO(obj)){
-                this.toUserId=null;
-                FacesContext.getCurrentInstance().addMessage("",new FacesMessage("Friend Request sent successfully!"));
+            //this function sends friend request even for already friends so wrote above code to fix it
+            if(FriendDAO.checkExistingFriendRequestDAO(fromUserId,toUserId)){ //if friend request is already sent i.e. status in new then dont send the request again
+                if(FriendDAO.sendFriendRequestDAO(obj)){
+                    this.toUserId=null;
+                    FacesContext.getCurrentInstance().addMessage("",new FacesMessage("Friend Request sent successfully!"));
+                }else{
+                    FacesContext.getCurrentInstance().addMessage("",new FacesMessage("Oops! something went wrong, Please try again!!"));    
+                }
             }else{
-                FacesContext.getCurrentInstance().addMessage("",new FacesMessage("Oops! something went wrong, Please try again!!"));    
+                this.toUserId=null;
+                FacesContext.getCurrentInstance().addMessage("",new FacesMessage("Multiple friend request to "+toUserId+ " not allowed!"));
             }
         }else{
             FacesContext.getCurrentInstance().addMessage("",new FacesMessage("Oops!, Invalid User Id!"));    
